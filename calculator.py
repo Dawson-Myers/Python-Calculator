@@ -1,3 +1,5 @@
+
+
 import art
 
 def add(n1, n2):
@@ -19,38 +21,26 @@ operations = {
     "/": divide,
 }
 
-begin = True
-
-while begin:
+def calculator():
     print(art.logo)
-    first_number = float(input("Enter first number: "))
-    operator = input("Enter operator choices are +, -, *, or /: ")
-    second_number = float(input("Enter second number: "))
+    does_operations = True
+    first_number = float(input("Type the first number: "))
 
-    def math_output(first_number, operator, second_number):
-        if operator == "+":
-            return operations["+"](first_number, second_number)
-        if operator == "-":
-            return operations["-"](first_number, second_number)
-        if operator == "*":
-            return operations["*"](first_number, second_number)
-        if operator == "/":
-            return operations["/"](first_number, second_number)
+    while does_operations:
+        for operator in operations:
+            print(operator)
+        op_symbol = input("Type the operator symbol: ")
+        second_number = float(input("Type the second number: "))
+        output = operations[op_symbol](first_number, second_number)
+        print(f"{first_number} {op_symbol} {second_number} = {output}")
 
-    result = math_output(first_number, operator, second_number)
-    output = print(f"{first_number} {operator} {second_number} = {math_output(first_number, operator, second_number)}")
-    continue_math = input("Do you want to continue working with the previous result? (y/n): ").lower()
+        continue_operation = input("Would you like to continue? [y/n]: ")
 
-    while continue_math == "y":
-        new_operator = input("Enter another operator, choices are +, -, *, or /: ")
-        another_number =  int(input("Enter another number: "))
-        counter = 0
-        for count in range(counter + 1):
-            new_result = math_output(result, new_operator, another_number)
-            output = print(f"{result} {new_operator} {another_number} = {new_result}")
-            result = new_result
-            continue_math = input("Do you want to continue working with the previous result? (y/n): ").lower()
-            begin = False
-    else:
-        print("\n" * 20)
-        begin = True
+        if continue_operation == "y":
+            first_number = output
+        else:
+            does_operations = False
+            print("\n" * 20)
+            calculator()
+
+calculator()
