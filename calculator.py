@@ -1,5 +1,3 @@
-from setuptools.sandbox import setup_context
-
 import art
 
 def add(n1, n2):
